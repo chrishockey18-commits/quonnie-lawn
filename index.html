@@ -262,51 +262,118 @@
     /* ── SERVICES ── */
     #services { background: var(--white); }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+    .services-list {
       max-width: 1100px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
     }
 
-    .service-card {
-      background: var(--off-white);
-      border-radius: 8px;
-      padding: 2rem;
-      border-left: 4px solid var(--green);
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
     }
 
-    .service-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 80px; height: 80px;
-      background: radial-gradient(circle, rgba(46,125,50,0.08) 0%, transparent 70%);
-    }
+    .service-row.reverse { direction: rtl; }
+    .service-row.reverse > * { direction: ltr; }
 
-    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+    .service-text {}
 
-    .service-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .service-card h3 {
+    .service-text h3 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
+      font-size: 2rem;
       letter-spacing: 1px;
       color: var(--green-dark);
       margin-bottom: 0.5rem;
     }
 
-    .service-card p {
-      font-size: 0.9rem;
+    .service-text p {
+      font-size: 1rem;
       color: var(--gray);
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .service-includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .service-tag {
+      background: var(--off-white);
+      border: 1px solid #d0d0c8;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+
+    .before-after {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .ba-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 340px;
+    }
+
+    .ba-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ba-labels {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      pointer-events: none;
+    }
+
+    .ba-label {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .ba-label.before {
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+    }
+
+    .ba-label.after {
+      background: rgba(46,125,50,0.85);
+      color: #fff;
+      text-align: right;
+    }
+
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: var(--white);
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .service-row { grid-template-columns: 1fr; direction: ltr; }
+      .service-row.reverse { direction: ltr; }
+      .ba-images { height: 240px; }
     }
 
     /* ── WHY US ── */
@@ -541,38 +608,57 @@
     <div style="max-width:1100px;margin:0 auto;">
       <div class="section-label">What We Do</div>
       <h2>Our Services</h2>
-      <p class="section-intro">Everything your lawn needs, handled by a local team that actually cares about the work.</p>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🌿</div>
-          <h3>Lawn Mowing</h3>
-          <p>Clean, precise cuts every time. We mow at the right height for your grass type and leave your yard looking immaculate.</p>
+      <p class="section-intro">Real work, real results. See the difference Quonnie Lawn Care makes on every job.</p>
+
+      <div class="services-list">
+
+        <!-- SERVICE 1: Mowing Package -->
+        <div class="service-row">
+          <div class="service-text">
+            <h3>Full Lawn Service</h3>
+            <p>We never just mow and leave. Every visit includes mowing, weed whacking every edge and fence line, and blowing all clippings off your driveway, walkways, and patio. Your lawn will look like a professional crew spent all day — because we did.</p>
+            <div class="service-includes">
+              <span class="service-tag">Mowing</span>
+              <span class="service-tag">Weed Whacking</span>
+              <span class="service-tag">Blowing & Detailing</span>
+              <span class="service-tag">Edging</span>
+            </div>
+          </div>
+          <div class="before-after">
+            <div class="ba-images" style="grid-template-columns: 1fr;">
+              <img src="after-mowing.jpg" alt="Freshly mowed lawn by Quonnie Lawn Care" />
+            </div>
+            <div class="ba-labels" style="grid-template-columns: 1fr;">
+              <div class="ba-label after" style="text-align:left; background:rgba(46,125,50,0.85);">✓ Our Work</div>
+            </div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon">✂️</div>
-          <h3>Trimming & Edging</h3>
-          <p>Sharp edges along driveways, walkways, and beds — the finishing touch that separates a good lawn from a great one.</p>
+
+        <!-- SERVICE 2: Cleanup & Planting -->
+        <div class="service-row reverse">
+          <div class="service-text">
+            <h3>Cleanup & Planting</h3>
+            <p>Overgrown beds, dead plants, and accumulated debris make any property look neglected. We clear it all out, clean up the area, and can replant with the right flowers and shrubs for Rhode Island's climate so it stays looking great.</p>
+            <div class="service-includes">
+              <span class="service-tag">Bed Clearing</span>
+              <span class="service-tag">Debris Removal</span>
+              <span class="service-tag">Planting</span>
+              <span class="service-tag">Seasonal Cleanup</span>
+            </div>
+          </div>
+          <div class="before-after">
+            <div class="ba-images">
+              <img src="before-cleanup.jpg" alt="Before cleanup and planting" />
+              <img src="after-cleanup.jpg" alt="After cleanup and planting" />
+            </div>
+            <div class="ba-labels">
+              <div class="ba-label before">Before</div>
+              <div class="ba-label after">After</div>
+            </div>
+            <div class="ba-divider"></div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🍂</div>
-          <h3>Clearing & Cleanup</h3>
-          <p>Seasonal cleanups, debris removal, and leaf clearing to keep your property clean and ready for any season.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🌱</div>
-          <h3>Planting</h3>
-          <p>From flower beds to shrubs, we help beautify your outdoor space with the right plants for Rhode Island's climate.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🌬️</div>
-          <h3>Blowing & Detailing</h3>
-          <p>We finish every job by blowing clippings off your driveway, sidewalks, and patio. No mess left behind.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🌾</div>
-          <h3>Weed Whacking</h3>
-          <p>We tackle every corner, fence line, and hard-to-reach spot that a mower can't get to.</p>
-        </div>
+
       </div>
     </div>
   </section>
